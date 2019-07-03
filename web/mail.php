@@ -8,10 +8,11 @@
   $transaction_number = $_POST['transaction_number'];
 
   $email = new \SendGrid\Mail\Mail(); 
-  $email->setFrom("info@immigrationtrust.co.nz", "Immigration Trust");
+  $email->setFrom("account@immigrationtrust.co.nz", "Immigration Trust");
   $email->setSubject("Confirmation of Payment");
   $email->addTo($receive_email, $full_name);
   $email->addCc("info@immigrationtrust.co.nz", "Ivy");
+  $email->addBcc("simon@immigrationtrust.co.nz", "Simon");
   $email->addDynamicTemplateData(
     new \SendGrid\Mail\Substitution("name", $full_name)
   );
@@ -25,9 +26,9 @@
     new \SendGrid\Mail\Substitution("transaction", $transaction_number)
   );
   $email->setTemplateId(
-    new \SendGrid\Mail\TemplateId("d-016a8afdcd4a48dca9c87c3d750d3f30")
+    new \SendGrid\Mail\TemplateId("d-213e0757d26948b9aee817d77476c0e4")
   );
-  $sendgrid = new \SendGrid("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");
+  $sendgrid = new \SendGrid("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");
   try {
       $response = $sendgrid->send($email);
       print $response->statusCode() . "\n";
