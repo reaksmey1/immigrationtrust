@@ -5,6 +5,7 @@ require_once __DIR__ . '/Transaction.php';
 require_once __DIR__ . '/SampleTransactionDB.php';
 
 $configFilePath = __DIR__ . '/../config.json';
+
 if (!file_exists($configFilePath)) {
 	die('Missing config.json');
 }
@@ -15,7 +16,9 @@ if (!isset($config['paystation_id'], $config['hmac_key'], $config['gateway_id'],
 	die('config.json is missing credentials.');
 }
 
-$paystation = new \Paystation\API(new SampleTransactionDB(), $config['paystation_id'], $config['hmac_key'], $config['gateway_id'], $config['test_mode']);
+$paystation = new \Paystation\API(new SampleTransactionDB(), getenv('PAY_STATION_ID'), $config['hmac_key'], $config['gateway_id'], $config['test_mode']);
+
+// $paystation = new \Paystation\API(new SampleTransactionDB(), $config['paystation_id'], $config['hmac_key'], $config['gateway_id'], $config['test_mode']);
 
 if (isset($config['api_url'])) {
 	$paystation->setApiUrl($config['api_url']);

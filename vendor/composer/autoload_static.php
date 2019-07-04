@@ -4,23 +4,33 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitbd07c053e5599a75f06a4a4a87d686c6
+class ComposerStaticInit0967974b9c7cc229ec0fe19616e95552
 {
     public static $files = array (
+        '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         '3f8bdd3b35094c73a26f0106e3c0f8b2' => __DIR__ . '/..' . '/sendgrid/sendgrid/lib/SendGrid.php',
     );
 
     public static $prefixLengthsPsr4 = array (
         'S' => 
         array (
+            'Symfony\\Polyfill\\Ctype\\' => 23,
             'SendGrid\\Stats\\' => 15,
             'SendGrid\\Mail\\' => 14,
             'SendGrid\\Contacts\\' => 18,
             'SendGrid\\' => 9,
         ),
+        'D' => 
+        array (
+            'Dotenv\\' => 7,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
+        'Symfony\\Polyfill\\Ctype\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
+        ),
         'SendGrid\\Stats\\' => 
         array (
             0 => __DIR__ . '/..' . '/sendgrid/sendgrid/lib/stats',
@@ -38,13 +48,28 @@ class ComposerStaticInitbd07c053e5599a75f06a4a4a87d686c6
             0 => __DIR__ . '/..' . '/sendgrid/php-http-client/lib',
             1 => __DIR__ . '/..' . '/sendgrid/sendgrid/lib',
         ),
+        'Dotenv\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/vlucas/phpdotenv/src',
+        ),
+    );
+
+    public static $prefixesPsr0 = array (
+        'P' => 
+        array (
+            'PhpOption\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/phpoption/phpoption/src',
+            ),
+        ),
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitbd07c053e5599a75f06a4a4a87d686c6::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitbd07c053e5599a75f06a4a4a87d686c6::$prefixDirsPsr4;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit0967974b9c7cc229ec0fe19616e95552::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit0967974b9c7cc229ec0fe19616e95552::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit0967974b9c7cc229ec0fe19616e95552::$prefixesPsr0;
 
         }, null, ClassLoader::class);
     }
