@@ -16,7 +16,7 @@ require_once __DIR__ . '/SampleTransactionDB.php';
 // 	die('config.json is missing credentials.');
 // }
 
-$paystation = new \Paystation\API(new SampleTransactionDB(), getenv('PAY_STATION_ID'), getenv('HMAC_KEY'), getenv('GATEWAY_ID'), getenv('TEST_MODE'));
+$paystation = new \Paystation\API(new SampleTransactionDB(), getenv('PAY_STATION_ID'), getenv('HMAC_KEY'), getenv('GATEWAY_ID'), false);
 
 // $paystation = new \Paystation\API(new SampleTransactionDB(), $config['paystation_id'], $config['hmac_key'], $config['gateway_id'], $config['test_mode']);
 
