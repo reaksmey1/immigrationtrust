@@ -17,16 +17,16 @@
               <input type="text" name="full_name" id="full_name" class="field-long" />
             </li>
             <li>
-              <label>Email Address <span class="required">*</span></label>
-              <input type="text" name="emailTxt" id="email" class="field-long" />
+					<label>Email Address <span class="required">*</span></label>
+            <input type="email" name="emailTxt" id="email" class="field-long" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required />
             </li>
             <li>
               <label>Invoice Number <span class="required">*</span></label>
-              <input type="text" name="invoice" id="invoice_number" class="field-long" />
+              <input type="text" name="invoice" id="invoice_number" class="field-long" required />
             </li>
             <li>
               <label>Amount to Pay <span class="required">*</span></label>
-              <input type="number" name="amount" id="payment_amount" class="field-long" />
+              <input type="number" name="amount" id="payment_amount" class="field-long" required />
             </li>
             <li>
                 <input type="submit" id="checkout_button" value="Proceed to Payment Page" />

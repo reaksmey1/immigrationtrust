@@ -61,13 +61,14 @@ else {
 		// errorCode is a paystation response which is set after a transaction is complete. A negative error code means no error code has been returned.
 		if (transaction && (transaction.errorCode > -1 || transaction.hasError)) {
 			if (transaction.errorCode == 0) {
-        sendConfirmationEmail();
+        sendConfirmationEmailToAdmin();
+        sendConfirmationEmailToCustomer();
       }
 			onTransactionComplete(transaction);
 		}
   }
-  
-  function sendConfirmationEmail() {
+
+  function sendConfirmationEmailToAdmin() {
     var data = {
         'full_name': _fullname,
         'receive_email': _email,
@@ -78,6 +79,24 @@ else {
     // POST data to the php file
     $.ajax({ 
         url: 'mail.php', 
+        data: data,
+        type: 'POST',
+        success: function (data) {
+        }
+    });
+  }
+  
+  function sendConfirmationEmailToCustomer() {
+    var data = {
+        'full_name': _fullname,
+        'receive_email': _email,
+        'payment_amount': _payment_amount,
+        'invoice_number': _invoice_number,
+        'transaction_number': _transactionId,
+    };
+    // POST data to the php file
+    $.ajax({ 
+        url: 'customer_mail.php', 
         data: data,
         type: 'POST',
         success: function (data) {

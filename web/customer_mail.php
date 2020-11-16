@@ -10,8 +10,7 @@
   $email = new \SendGrid\Mail\Mail(); 
   $email->setFrom("account@immigrationtrust.co.nz", "Immigration Trust");
   $email->setSubject("Confirmation of Payment");
-  $email->addTo("info@immigrationtrust.co.nz", "Ivy");
-  $email->addCc("simon@immigrationtrust.co.nz", "Simon");
+  $email->addTo($receive_email, $full_name);
   $email->addDynamicTemplateData(
     new \SendGrid\Mail\Substitution("name", $full_name)
   );
