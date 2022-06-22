@@ -19,7 +19,6 @@ if(!$captcha){
   $response = file_get_contents($url);
   $responseKeys = json_decode($response,true);
   // should return JSON with success as true
-  echo $responseKeys;
   if($responseKeys["success"]) {
     if ($amount && $invoice && $email) {
       $transaction = $paystation->createTransaction($amount, $invoice, $email, $full_name); // Replace 'sample_checkout_transaction' with your own merchant reference.
