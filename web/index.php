@@ -28,11 +28,11 @@
               <label>Amount to Pay <span class="required">*</span></label>
               <input type="number" name="amount" id="payment_amount" class="field-long" required />
             </li>
-            <?php
-              require_once('recaptchalib.php');
-              $publickey = getenv('RECAPTCHA_PUBLIC_KEY');;
-              echo recaptcha_get_html($publickey);
-            ?>
+			<?php
+				require_once('recaptchalib.php');
+				$publickey = getenv('RECAPTCHA_PUBLIC_KEY');;
+				echo recaptcha_get_html($publickey);
+			?>
             <li>
                 <input type="submit" id="checkout_button" value="Proceed to Payment Page" />
             </li>
