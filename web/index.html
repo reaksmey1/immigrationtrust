@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 	<title>Hosted Payment Demo</title>
+	<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" type="text/css" href="css/paystation.css">
 </head>
@@ -28,11 +29,7 @@
               <label>Amount to Pay <span class="required">*</span></label>
               <input type="number" name="amount" id="payment_amount" class="field-long" required />
             </li>
-			<?php
-				require_once('recaptchalib.php');
-				$publickey = getenv('RECAPTCHA_PUBLIC_KEY');;
-				echo recaptcha_get_html($publickey);
-			?>
+			<div class="g-recaptcha" data-sitekey="6LfFH44gAAAAAHEOvnxtQUaJ6M8WQLvtFXBcOcE3"></div>
             <li>
                 <input type="submit" id="checkout_button" value="Proceed to Payment Page" />
             </li>
