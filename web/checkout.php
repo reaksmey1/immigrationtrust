@@ -1,21 +1,33 @@
 <?php
 require_once __DIR__ . '/../src/init.php';
+require_once('recaptchalib.php');
 
 $amount = $_REQUEST['amount'] ? $_REQUEST['amount'] * 100 : false;
 $fix_amount = $_REQUEST['amount'];
 $invoice = $_REQUEST['invoice'];
 $full_name = $_REQUEST['full_name'];
 $email = $_REQUEST['emailTxt'];
+$privatekey = getenv('RECAPTCHA_PRIVATE_KEY');
+$resp = recaptcha_check_answer ($privatekey,
+                                $_SERVER["REMOTE_ADDR"],
+                                $_POST["recaptcha_challenge_field"],
+                                $_POST["recaptcha_response_field"]);
 
-if ($amount && $invoice && $email) {
-	$transaction = $paystation->createTransaction($amount, $invoice, $email, $full_name); // Replace 'sample_checkout_transaction' with your own merchant reference.
-}
-else {
-	$transaction = new \Paystation\Transaction();
-	$transaction->transactionId = -1;
-	$transaction->hasError = true;
-	$transaction->errorMessage = "No amount / email / invoice specified.";
-}
+if (!$resp->is_valid) {
+  // What happens when the CAPTCHA was entered incorrectly
+  die ("The reCAPTCHA wasn't entered correctly. Go back and try it again." .
+        "(reCAPTCHA said: " . $resp->error . ")");
+} else {
+  if ($amount && $invoice && $email) {
+    $transaction = $paystation->createTransaction($amount, $invoice, $email, $full_name); // Replace 'sample_checkout_transaction' with your own merchant reference.
+  }
+  else {
+    $transaction = new \Paystation\Transaction();
+    $transaction->transactionId = -1;
+    $transaction->hasError = true;
+    $transaction->errorMessage = "No amount / email / invoice specified.";
+  }
+}                                
 ?>
 <!doctype html>
 <html>
