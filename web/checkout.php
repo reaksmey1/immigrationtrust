@@ -11,24 +11,25 @@ $captcha = $_POST['g-recaptcha-response'];
 if(!$captcha){
   echo 'Please check the the captcha form.';
   exit;
-}
-$secretKey = "6LfFH44gAAAAAOxTeS-yT99YdyfgaXvtsBmRHfVa";
-$ip = $_SERVER['REMOTE_ADDR'];
-// post request to server
-$url = 'https://www.google.com/recaptcha/api/siteverify?secret=' . urlencode($secretKey) .  '&response=' . urlencode($captcha);
-$response = file_get_contents($url);
-$responseKeys = json_decode($response,true);
-// should return JSON with success as true
-echo $responseKeys;
-if($responseKeys["success"]) {
-  if ($amount && $invoice && $email) {
-    $transaction = $paystation->createTransaction($amount, $invoice, $email, $full_name); // Replace 'sample_checkout_transaction' with your own merchant reference.
-  }
-  else {
-    $transaction = new \Paystation\Transaction();
-    $transaction->transactionId = -1;
-    $transaction->hasError = true;
-    $transaction->errorMessage = "No amount / email / invoice specified.";
+} else {
+  $secretKey = getenv('RECAPTCHA_PRIVATE_KEY');
+  $ip = $_SERVER['REMOTE_ADDR'];
+  // post request to server
+  $url = 'https://www.google.com/recaptcha/api/siteverify?secret=' . urlencode($secretKey) .  '&response=' . urlencode($captcha);
+  $response = file_get_contents($url);
+  $responseKeys = json_decode($response,true);
+  // should return JSON with success as true
+  echo $responseKeys;
+  if($responseKeys["success"]) {
+    if ($amount && $invoice && $email) {
+      $transaction = $paystation->createTransaction($amount, $invoice, $email, $full_name); // Replace 'sample_checkout_transaction' with your own merchant reference.
+    }
+    else {
+      $transaction = new \Paystation\Transaction();
+      $transaction->transactionId = -1;
+      $transaction->hasError = true;
+      $transaction->errorMessage = "No amount / email / invoice specified.";
+    }
   }
 }
 ?>
